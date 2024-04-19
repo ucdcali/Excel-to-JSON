@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Excel Data Viewer</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <h1>Upload Excel File</h1>
+  <form action="/upload" method="post" enctype="multipart/form-data">
+    <input type="file" name="excelFile" required>
+    <button type="submit">Upload</button>
+  </form>
+  <% if (rows && rows.length > 0) { %>
+    <table>
+      <th><%- rows[0][0] %></th>
+      <% rows.forEach((row, index) => { %>
+        <% if (index > 0) { %>
+        <tr onclick='showDetails(<%- JSON.stringify(rows[0]) %>, <%- JSON.stringify(row) %>)'>
+          <td><%- row[0] %></td>
+        </tr>
+        <% } %>
+      <% }); %>
+    </table>
+    <div id="details"></div>
+  <% } %>
+  <script src="/script.js"></script>
+</body>
+</html>
